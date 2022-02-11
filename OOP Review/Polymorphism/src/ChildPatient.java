@@ -31,4 +31,7 @@ public class ChildPatient extends Person implements Diagnosable{
     public void setDiastolic(int d) {
         diastolic = d;
     }
+
+    public boolean hasFever() {
+        return this.temperature > 100.4D;}
 }
