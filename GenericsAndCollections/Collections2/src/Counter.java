@@ -1,28 +1,43 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Map;
 
 public class Counter<E> {
-    private HashMap/* TODO 
-The HashMap should accomodate a generic class for the keys and Integer for the value*/ counts;
+    private HashMap<E, Integer> counts;
 
     public Counter(E[] things){
-/* TODO
-Loop through the elements of "things" and use the HashMap "counts"
-to store the elements of things as keys, and the number of times they
-appear in the array as values. Check the instructions. */ }
+        counts = new HashMap<>();
+        for(E thing: things) {
+            if (counts.get(thing) != null) {
+                int value = counts.get(thing);
+                counts.replace(thing, value + 1);
+            } else {
+                counts.put(thing, 1);
+            }
+        }
     }
 
-    public Integer getCount(E element){
-      /* TODO 
-This just returns the specific count for an element. It is a wrapper
-for a getting the value of the HashMap given the key "element" */);
+    public Integer getCount(E element)
+    {
+        return counts.get(element);
     }
 
     public int getSize(){
         return this.counts.size();
     }
 
-    public E mostFrequent()/* TODO 
-Returns the most frequent key in the HashMap*/t;
+    public E mostFrequent()
+    {
+        int n = 0;
+        E key = null;
+        for (Map.Entry<E, Integer> entry : counts.entrySet())
+        {
+            if (n < entry.getValue())
+            {
+                key = entry.getKey();
+                n = entry.getValue();
+            }
+        }
+        return key;
     }
 }
