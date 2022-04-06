@@ -2,21 +2,77 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Resume {
-/* TODO */
-Create a public member inner class Education according to the specifications.
+    public class Education {
+        String school;
+        String major;
 
-/* TODO */
-Create a public static inner class called Experience, according to the specifications.
+        public Education(String school, String major) {
+            this.school = school;
+            this.major = major;
+        }
 
-/* TODO */
-Create the Person and List of Education and List of experience objects. They should be private.
-    public Resume(Person p){
-/* TODO */
-This constructor should initialize the person and do all necessary initializations for the other methods to work.
+        public String getSchool() {
+            return school;
+        }
+
+        public String getMajor() {
+            return major;
+        }
+
+        @Override
+        public String toString() {
+            return major + " at " + school;
+        }
     }
 
-/* TODO */
-Create the addEducation, addExperience and override the toString methods as specified.
+    public static class Experience {
+        String title;
+        int fromYear;
+        int toYear;
+
+        public Experience(String title, int startYear, int endYear) {
+            this.title = title;
+            this.fromYear = startYear;
+            this.toYear = endYear;
+
+        }
+
+        @Override
+        public String toString() {
+            return fromYear + "-" + toYear + ": " + title;
+        }
+    }
+
+    private Person person;
+    private List<Education> educationList;
+    private List<Experience> experienceList;
+
+    public Resume(Person p){
+        person = p;
+        educationList = new ArrayList<>();
+        experienceList= new ArrayList<>();
+    }
+
+    public void addEducation(Education ed) {
+        educationList.add(ed);
+    }
+
+    public void addExperience(Experience ex) {
+        experienceList.add(ex);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append(person.toString() + "\n");
+        s.append("Experience\n");
+        experienceList.forEach(item -> s.append(item + "\n"));
+        s.append("Education\n");
+        educationList.forEach(item -> s.append(item + "\n"));
+
+        return s.toString();
+    }
 
 
 

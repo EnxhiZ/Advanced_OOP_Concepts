@@ -3,17 +3,77 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class Resume {
-/* TODO */
-Same two inner classes and member variables as in task 3.
-    public Resume(Person p){
-/* TODO */
-Same initialization of Person and the List of Education objects
- /* TODO */
-Initialize the priority queue in one line, without importing the Comparator interface.
+    public class Education {
+        String school;
+        String major;
+
+        public Education(String school, String major) {
+            this.school = school;
+            this.major = major;
+        }
+
+        public String getSchool() {
+            return school;
+        }
+
+        public String getMajor() {
+            return major;
+        }
+
+        @Override
+        public String toString() {
+            return major + " at " + school;
+        }
     }
-/* TODO */
-The getter for experience and the methods to add education and experience objects stay the same, as well as the toString()
 
+    public static class Experience {
+        String title;
+        int fromYear;
+        int toYear;
 
+        public Experience(String title, int startYear, int endYear) {
+            this.title = title;
+            this.fromYear = startYear;
+            this.toYear = endYear;
 
+        }
+
+        @Override
+        public String toString() {
+            return fromYear + "-" + toYear + ": " + title;
+        }
+    }
+    private Person person;
+    private List<Education> educationList;
+    private PriorityQueue<Experience> experienceList;
+
+    public Resume(Person p) {
+        person = p;
+        educationList = new ArrayList<>();
+        experienceList = new PriorityQueue<>((o1, o2) -> o2.toYear - o1.toYear);
+    }
+    public PriorityQueue<Experience> getExperience() {
+        return experienceList;
+    }
+
+    public void addEducation(Education ed) {
+        educationList.add(ed);
+    }
+
+    public void addExperience(Experience ex) {
+        experienceList.add(ex);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append(person.toString() + "\n");
+        s.append("Experience\n");
+        experienceList.forEach(item -> s.append(item + "\n"));
+        s.append("Education\n");
+        educationList.forEach(item -> s.append(item + "\n"));
+
+        return s.toString();
+    }
 }

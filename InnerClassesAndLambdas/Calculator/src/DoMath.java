@@ -1,5 +1,4 @@
 @FunctionalInterface
 public interface DoMath{
-/* TODO */
-Specify a compute method that takes two Double objects and returns a Double object.
+    Double compute(Double o1, Double o2);
 }
